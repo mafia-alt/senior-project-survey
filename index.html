@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Athlete Fuel | Premium Nutrition for Elite Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050811;
+      --bg-secondary: #0a0f1e;
+      --card: rgba(18, 24, 42, 0.6);
+      --primary: #4f7cff;
+      --primary-glow: rgba(79, 124, 255, 0.4);
+      --accent: #22c55e;
+      --accent-glow: rgba(34, 197, 94, 0.3);
+      --text: #f0f4f8;
+      --text-secondary: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* 3D Background Animation */
+    .bg-3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(79, 124, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      animation: bgFloat 20s ease-in-out infinite;
+    }
+
+    @keyframes bgFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    /* Glassmorphism Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(11, 15, 26, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transform-style: preserve-3d;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 800;
+      font-size: 28px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(79, 124, 255, 0.3);
+      transform: translateZ(20px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--primary) 0%, #3d63d2 100%);
+      padding: 12px 24px;
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 
+        0 4px 20px rgba(79, 124, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 8px 30px rgba(79, 124, 255, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* 3D Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding: 100px 40px;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .hero-content {
+      transform-style: preserve-3d;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero h2 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateZ(30px);
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 500px;
+      transform: translateZ(20px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 40px;
+      transform: translateZ(40px);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* 3D Glass Card */
+    .glass-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.7s;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    .glass-card:hover {
+      transform: rotateY(-5deg) rotateX(5deg) translateZ(20px);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .hero .glass-card {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateY(-5deg); }
+      50% { transform: translateY(-20px) rotateY(5deg); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .macro-display {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .macro-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .macro-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .macro-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .macro-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Features Grid with 3D */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at top right, rgba(79, 124, 255, 0.1), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border-color: rgba(79, 124, 255, 0.3);
+    }
+
+    .feature-card:hover::after {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: inline-block;
+      transform: translateZ(30px);
+      filter: drop-shadow(0 4px 10px rgba(79, 124, 255, 0.3));
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px 0;
+      font-size: 20px;
+      font-weight: 700;
+      transform: translateZ(20px);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+      transform: translateZ(10px);
+    }
+
+    /* Meals Section with Flip Cards */
+    .meals {
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .meal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      perspective: 1000px;
+    }
+
+    .meal-card {
+      position: relative;
+      height: 400px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .meal-card:hover {
+      transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
+    }
+
+    .meal-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .meal-image {
+      width: 100%;
+      height: 60%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .meal-card:hover .meal-image {
+      transform: scale(1.1);
+    }
+
+    .meal-content {
+      padding: 24px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(11, 15, 26, 0.95), transparent);
+    }
+
+    .meal-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(34, 197, 94, 0.2);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .meal-content h4 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .meal-stats {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .meal-stats span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Advanced Calculator */
+    .calculator {
+      padding: 100px 40px;
+      background: linear-gradient(180deg, transparent 0%, rgba(79, 124, 255, 0.05) 50%, transparent 100%);
+    }
+
+    .calc-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .calc-form {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 15px;
+      transition: all 0.3s;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .calc-result {
+      margin-top: 32px;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 16px;
+      display: none;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .calc-result.active {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .result-item {
+      text-align: center;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+
+    .result-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .result-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Info Card */
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .info-card h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+
+    .info-card p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .benefit-list {
+      list-style: none;
+      space-y: 12px;
+    }
+
+    .benefit-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .benefit-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      width: 24px;
+      height: 24px;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 60px 40px;
+      border-top: 1px solid var(--border);
+      margin-top: 100px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    footer p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Parallax Scroll Animation */
+    .parallax-element {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(79, 124, 255, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(60px);
+    }
+
+    .parallax-1 { top: 20%; left: -10%; animation: float 15s infinite; }
+    .parallax-2 { top: 60%; right: -5%; animation: float 18s infinite reverse; }
+    .parallax-3 { bottom: 20%; left: 30%; animation: float 20s infinite; }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero h2 {
+        font-size: 40px;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .calc-container {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        position: relative;
+        top: 0;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Loading Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(79, 124, 255, 0.3);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="bg-3d"></div>
+  <div class="parallax-element parallax-1"></div>
+  <div class="parallax-element parallax-2"></div>
+  <div class="parallax-element parallax-3"></div>
+
+  <header>
+    <h1>⚡ Athlete Fuel</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#meals">Meals</a>
+      <a href="#calc">Calculator</a>
+      <a href="#about">About</a>
+      <a href="#" class="btn">Get Started</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h2>Fuel Like a Pro Athlete</h2>
+      <p>Elite nutrition coaching meets gourmet meal delivery. Personalized macro plans, premium ingredients, and proven results trusted by professional athletes worldwide.</p>
+      <a href="#calc" class="btn">Calculate Your Plan</a>
+      
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">50k+</span>
+          <span class="stat-label">Athletes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">98%</span>
+          <span class="stat-label">Success Rate</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">4.9★</span>
+          <span class="stat-label">Rating</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="glass-card">
+      <h3 style="margin-bottom: 8px; font-size: 20px;">Today's Target</h3>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Based on your bulking phase</p>
+      <div class="macro-display">
+        <div class="macro-item">
+          <div class="macro-value">2,800</div>
+          <div class="macro-label">Calories</div>
+        </div>
+        <div class="macro-item">
+          <div class="macro-value">180g</div>
+          <div class="macro-label">Protein</div>
+        </div>
+        <div class="macro-item">
+          <div class="macro-value">300g</div>
+          <div class="macro-label">Carbs</div>
+        </div>
+        <div class="macro-item">
+          <div class="macro-value">80g</div>
+          <div class="macro-label">Fats</div>
+        </div>
+      </div>
+      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 14px; color: var(--text-secondary);">Next meal in</span>
+          <span style="font-size: 18px; font-weight: 700; color: var(--primary);">02:45:30</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🍗</div>
+      <h3>Smart Meal AI</h3>
+      <p>Our algorithm analyzes your training schedule, body composition, and goals to generate the perfect meal timing and macros.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📦</div>
+      <h3>Premium Delivery</h3>
+      <p>Chef-prepared meals delivered fresh daily in temperature-controlled packaging. Never frozen, always optimal.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Advanced Analytics</h3>
+      <p>Track body composition changes, energy levels, and performance metrics with our integrated dashboard.</p>
+    </div>
+  </section>
+
+  <section id="meals" class="meals">
+    <div class="section-header">
+      <h2>Performance Meals</h2>
+      <p>Designed by sports nutritionists, prepared by Michelin-trained chefs</p>
+    </div>
+    
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-card-inner">
+          <img src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&q=80" alt="Chicken & Rice" class="meal-image">
+          <div class="meal-content">
+            <div class="meal-tag">High Protein</div>
+            <h4>Teriyaki Chicken Bowl</h4>
+            <div class="meal-stats">
+              <span>🔥 650 kcal</span>
+              <span>🥩 45g protein</span>
+              <span>⏱️ 8 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-card">
+        <div class="meal-card-inner">
+          <img src="https://images.unsplash.com/photo-1547496502-ffa76f1d21a6?w=800&q=80" alt="Beef Bowl" class="meal-image">
+          <div class="meal-content">
+            <div class="meal-tag" style="background: rgba(79, 124, 255, 0.2); color: var(--primary); border-color: rgba(79, 124, 255, 0.3);">Bulking</div>
+            <h4>Wagyu Beef Power Bowl</h4>
+            <div class="meal-stats">
+              <span>🔥 850 kcal</span>
+              <span>🥩 52g protein</span>
+              <span>⏱️ 12 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="meal-card">
+        <div class="meal-card-inner">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80" alt="Salad" class="meal-image">
+          <div class="meal-content">
+            <div class="meal-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3);">Cutting</div>
+            <h4>Superfood Salmon Salad</h4>
+            <div class="meal-stats">
+              <span>🔥 420 kcal</span>
+              <span>🥩 38g protein</span>
+              <span>⏱️ 5 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calc" class="calculator">
+    <div class="calc-container">
+      <div class="calc-form">
+        <h2 style="margin-bottom: 8px; font-size: 32px;">Smart Calculator</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px;">Precision nutrition targets based on your physiology</p>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="age" placeholder="25" min="18" max="80">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Weight (kg)</label>
+            <input type="number" id="weight" placeholder="75" step="0.1">
+          </div>
+          <div class="form-group">
+            <label>Height (cm)</label>
+            <input type="number" id="height" placeholder="180" step="0.1">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Activity Level</label>
+          <select id="activity">
+            <option value="1.2">Sedentary (Office job)</option>
+            <option value="1.375">Light Exercise (1-2 days/week)</option>
+            <option value="1.55" selected>Moderate Exercise (3-5 days/week)</option>
+            <option value="1.725">Heavy Exercise (6-7 days/week)</option>
+            <option value="1.9">Athlete (2x per day)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Goal</label>
+          <select id="goal">
+            <option value="cut">Fat Loss (Cutting)</option>
+            <option value="maintain">Maintenance</option>
+            <option value="bulk" selected>Muscle Gain (Bulking)</option>
+          </select>
+        </div>
+
+        <button class="btn" onclick="calculateMacros()" style="width: 100%; margin-top: 8px;">
+          Calculate My Plan
+        </button>
+
+        <div id="result" class="calc-result">
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 4px;">Daily Target</div>
+            <div style="font-size: 36px; font-weight: 800; color: var(--accent);" id="total-cals">0 kcal</div>
+          </div>
+          <div class="result-grid">
+            <div class="result-item">
+              <div class="result-value" id="protein-val">0g</div>
+              <div class="result-label">Protein</div>
+            </div>
+            <div class="result-item">
+              <div class="result-value" id="carbs-val">0g</div>
+              <div class="result-label">Carbs</div>
+            </div>
+            <div class="result-item">
+              <div class="result-value" id="fats-val">0g</div>
+              <div class="result-label">Fats</div>
+            </div>
+            <div class="result-item">
+              <div class="result-value" id="bmr-val">0</div>
+              <div class="result-label">BMR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3>Why Athletes Choose Us</h3>
+        <p>Our calculator uses the Mifflin-St Jeor equation combined with training volume factors to provide precision targets that actually work.</p>
+        
+        <ul class="benefit-list">
+          <li>PhD-designed algorithms</li>
+          <li>Adjusts for training intensity</li>
+          <li>Macro cycling options</li>
+          <li>Meal timing optimization</li>
+          <li>Supplement recommendations</li>
+          <li>Weekly adjustment protocols</li>
+        </ul>
+
+        <div style="margin-top: 32px; padding: 20px; background: rgba(79, 124, 255, 0.1); border-radius: 12px; border: 1px solid rgba(79, 124, 255, 0.2);">
+          <div style="font-size: 14px; color: var(--primary); font-weight: 600; margin-bottom: 4px;">Pro Tip</div>
+          <div style="font-size: 13px; color: var(--text-secondary);">For optimal results, aim for 1.6-2.2g protein per kg of bodyweight during bulking phases.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Support</a>
+      <a href="#">Careers</a>
+    </div>
+    <p>© 2026 Athlete Fuel Inc. — Fueling Elite Performance</p>
+  </footer>
+
+  <script>
+    // Remove loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 500);
+    });
+
+    // 3D Parallax Effect on Mouse Move
+    document.addEventListener('mousemove', (e) => {
+      const cards = document.querySelectorAll('.glass-card, .feature-card, .meal-card');
+      const mouseX = e.clientX / window.innerWidth - 0.5;
+      const mouseY = e.clientY / window.innerHeight - 0.5;
+
+      cards.forEach((card, index) => {
+        const speed = (index % 3 + 1) * 5;
+        const x = mouseX * speed;
+        const y = mouseY * speed;
+        
+        if (card.classList.contains('glass-card')) {
+          card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg) translateZ(20px)`;
+        }
+      });
+    });
+
+    // Advanced Calculator
+    function calculateMacros() {
+      const gender = document.getElementById('gender').value;
+      const age = parseFloat(document.getElementById('age').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const activity = parseFloat(document.getElementById('activity').value);
+      const goal = document.getElementById('goal').value;
+
+      if (!age || !weight || !height) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      // Mifflin-St Jeor Equation
+      let bmr;
+      if (gender === 'male') {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+      } else {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+      }
+
+      const tdee = bmr * activity;
+      
+      let targetCalories;
+      if (goal === 'cut') targetCalories = tdee - 500;
+      else if (goal === 'bulk') targetCalories = tdee + 500;
+      else targetCalories = tdee;
+
+      // Macro split based on goal
+      let proteinRatio, fatRatio, carbRatio;
+      
+      if (goal === 'cut') {
+        proteinRatio = 0.40;
+        fatRatio = 0.30;
+        carbRatio = 0.30;
+      } else if (goal === 'bulk') {
+        proteinRatio = 0.30;
+        fatRatio = 0.25;
+        carbRatio = 0.45;
+      } else {
+        proteinRatio = 0.30;
+        fatRatio = 0.30;
+        carbRatio = 0.40;
+      }
+
+      const protein = Math.round((targetCalories * proteinRatio) / 4);
+      const fats = Math.round((targetCalories * fatRatio) / 9);
+      const carbs = Math.round((targetCalories * carbRatio) / 4);
+
+      // Animate results
+      document.getElementById('result').classList.add('active');
+      document.getElementById('total-cals').textContent = Math.round(targetCalories) + ' kcal';
+      document.getElementById('protein-val').textContent = protein + 'g';
+      document.getElementById('carbs-val').textContent = carbs + 'g';
+      document.getElementById('fats-val').textContent = fats + 'g';
+      document.getElementById('bmr-val').textContent = Math.round(bmr);
+
+      // Smooth scroll to results on mobile
+      if (window.innerWidth < 968) {
+        document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements
+    document.querySelectorAll('.feature-card, .meal-card').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // Meal card 3D tilt effect
+    document.querySelectorAll('.meal-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+    });
+  </script>
+</body>
+</html>
