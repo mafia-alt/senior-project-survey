@@ -3,21 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Athlete Fuel | Premium Nutrition for Elite Performance</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Athlete Fuel | Elite Performance Nutrition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg: #050811;
+      --bg: #02040a;
       --bg-secondary: #0a0f1e;
-      --card: rgba(18, 24, 42, 0.6);
+      --card: rgba(18, 24, 42, 0.7);
       --primary: #4f7cff;
       --primary-glow: rgba(79, 124, 255, 0.4);
       --accent: #22c55e;
       --accent-glow: rgba(34, 197, 94, 0.3);
-      --text: #f0f4f8;
+      --text: #f8fafc;
       --text-secondary: #94a3b8;
-      --border: rgba(255, 255, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.08);
       --glass: rgba(255, 255, 255, 0.03);
+      --error: #ef4444;
+      --warning: #f59e0b;
     }
 
     * {
@@ -37,54 +40,94 @@
       color: var(--text);
       overflow-x: hidden;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* 3D Background Animation */
-    .bg-3d {
+    /* Animated Background Mesh */
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: 
+        radial-gradient(ellipse at 10% 20%, rgba(79, 124, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+      animation: meshFloat 20s ease-in-out infinite;
+    }
+
+    .bg-grid {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(79, 124, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-      animation: bgFloat 20s ease-in-out infinite;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
     }
 
-    @keyframes bgFloat {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-20px) scale(1.05); }
+    @keyframes meshFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
     }
 
-    /* Glassmorphism Header */
+    /* Navigation */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background: rgba(11, 15, 26, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      padding: 20px 48px;
+      background: rgba(2, 4, 10, 0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border);
-      position: sticky;
+      position: fixed;
+      width: 100%;
       top: 0;
       z-index: 1000;
       transform-style: preserve-3d;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s;
     }
 
-    header h1 {
-      margin: 0;
-      font-weight: 800;
-      font-size: 28px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+    header.scrolled {
+      padding: 15px 48px;
+      background: rgba(2, 4, 10, 0.95);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 26px;
+      background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 10px rgba(79, 124, 255, 0.3);
-      transform: translateZ(20px);
+      text-decoration: none;
+      transform: translateZ(30px);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), #3d63d2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      -webkit-text-fill-color: white;
+      font-size: 20px;
+      box-shadow: 0 4px 20px rgba(79, 124, 255, 0.4);
     }
 
     nav {
@@ -98,11 +141,10 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 12px;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      overflow: hidden;
     }
 
     nav a:hover {
@@ -111,9 +153,14 @@
       transform: translateY(-2px);
     }
 
+    nav a.active {
+      color: var(--primary);
+      background: rgba(79, 124, 255, 0.1);
+    }
+
     .btn {
       background: linear-gradient(135deg, var(--primary) 0%, #3d63d2 100%);
-      padding: 12px 24px;
+      padding: 12px 28px;
       border-radius: 12px;
       color: white;
       text-decoration: none;
@@ -126,7 +173,11 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      border: none;
     }
 
     .btn:hover {
@@ -140,289 +191,589 @@
       transform: translateY(0) scale(0.98);
     }
 
-    /* 3D Hero Section */
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Hero Section with 3D Perspective */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      padding: 100px 40px;
-      align-items: center;
-      max-width: 1400px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      padding: 160px 60px 100px;
+      max-width: 1440px;
       margin: 0 auto;
-      perspective: 1000px;
+      perspective: 2000px;
+      min-height: 100vh;
+      align-items: center;
     }
 
     .hero-content {
       transform-style: preserve-3d;
       animation: fadeInUp 1s ease-out;
+      position: relative;
+      z-index: 2;
     }
 
-    .hero h2 {
-      font-size: 56px;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(79, 124, 255, 0.1);
+      border: 1px solid rgba(79, 124, 255, 0.2);
+      border-radius: 50px;
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero h1 {
+      font-size: 72px;
       line-height: 1.1;
-      margin-bottom: 20px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+      margin-bottom: 24px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      transform: translateZ(30px);
+      letter-spacing: -2px;
+      transform: translateZ(40px);
     }
 
     .hero p {
       color: var(--text-secondary);
-      margin-bottom: 32px;
-      font-size: 18px;
-      line-height: 1.6;
-      max-width: 500px;
-      transform: translateZ(20px);
+      margin-bottom: 40px;
+      font-size: 20px;
+      line-height: 1.7;
+      max-width: 540px;
+      transform: translateZ(30px);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 60px;
+      transform: translateZ(50px);
     }
 
     .hero-stats {
       display: flex;
-      gap: 32px;
-      margin-top: 40px;
-      transform: translateZ(40px);
+      gap: 48px;
+      transform: translateZ(60px);
     }
 
     .stat {
-      text-align: center;
+      position: relative;
     }
 
     .stat-value {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--primary);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--text);
       display: block;
+      line-height: 1;
+      margin-bottom: 4px;
     }
 
     .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .stat::after {
+      content: '';
+      position: absolute;
+      right: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    .stat:last-child::after {
+      display: none;
+    }
+
+    /* 3D Floating Dashboard Card */
+    .hero-visual {
+      position: relative;
+      transform-style: preserve-3d;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotateY(-5deg) rotateX(5deg); }
+      50% { transform: translateY(-20px) rotateY(5deg) rotateX(10deg); }
+    }
+
+    .dashboard-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: 40px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      transform-style: preserve-3d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.03) 50%,
+        transparent 70%
+      );
+      transform: rotate(45deg);
+      transition: all 0.5s;
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .card-badge {
+      padding: 6px 12px;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .macro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .macro-box {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .macro-box:hover {
+      transform: translateY(-2px);
+      border-color: rgba(79, 124, 255, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .macro-box.protein { border-bottom: 3px solid #ef4444; }
+    .macro-box.carbs { border-bottom: 3px solid #3b82f6; }
+    .macro-box.fats { border-bottom: 3px solid #eab308; }
+    .macro-box.calories { border-bottom: 3px solid var(--accent); }
+
+    .macro-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .macro-label {
       font-size: 12px;
       color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    /* 3D Glass Card */
-    .glass-card {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      transform-style: preserve-3d;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin-top: 12px;
       overflow: hidden;
     }
 
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
+    .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      transition: left 0.7s;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+      transition: width 1s ease;
+      width: 0;
     }
 
-    .glass-card:hover::before {
-      left: 100%;
-    }
-
-    .glass-card:hover {
-      transform: rotateY(-5deg) rotateX(5deg) translateZ(20px);
-      box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    }
-
-    .hero .glass-card {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotateY(-5deg); }
-      50% { transform: translateY(-20px) rotateY(5deg); }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .macro-display {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .next-meal {
       margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .macro-item {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .macro-item:hover {
-      background: rgba(255, 255, 255, 0.06);
-      transform: translateY(-2px);
-    }
-
-    .macro-value {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .macro-label {
-      font-size: 11px;
+    .next-meal-info h4 {
+      font-size: 14px;
       color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      margin-bottom: 4px;
+      font-weight: 500;
     }
 
-    /* Features Grid with 3D */
+    .next-meal-info p {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .timer {
+      font-family: 'Inter', monospace;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(79, 124, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(79, 124, 255, 0.2);
+    }
+
+    /* Features Section */
     .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      padding: 80px 40px;
-      max-width: 1400px;
+      padding: 120px 60px;
+      max-width: 1440px;
       margin: 0 auto;
       perspective: 1000px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(79, 124, 255, 0.1);
+      color: var(--primary);
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(79, 124, 255, 0.2);
+    }
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
     }
 
     .feature-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 24px;
       padding: 40px 32px;
       position: relative;
       transform-style: preserve-3d;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
+      cursor: pointer;
     }
 
-    .feature-card::after {
+    .feature-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at top right, rgba(79, 124, 255, 0.1), transparent 70%);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(79, 124, 255, 0.5), transparent);
       opacity: 0;
       transition: opacity 0.3s;
     }
 
     .feature-card:hover {
-      transform: translateY(-10px) rotateX(5deg);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      transform: translateY(-8px) rotateX(5deg);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
       border-color: rgba(79, 124, 255, 0.3);
     }
 
-    .feature-card:hover::after {
+    .feature-card:hover::before {
       opacity: 1;
     }
 
-    .feature-icon {
-      font-size: 40px;
-      margin-bottom: 16px;
-      display: inline-block;
+    .feature-icon-wrap {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgba(79, 124, 255, 0.2), rgba(79, 124, 255, 0.05));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(79, 124, 255, 0.2);
       transform: translateZ(30px);
-      filter: drop-shadow(0 4px 10px rgba(79, 124, 255, 0.3));
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover .feature-icon-wrap {
+      transform: translateZ(40px) scale(1.1);
+      box-shadow: 0 10px 30px rgba(79, 124, 255, 0.3);
     }
 
     .feature-card h3 {
-      margin: 0 0 12px 0;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
+      margin-bottom: 12px;
       transform: translateZ(20px);
     }
 
     .feature-card p {
       color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 15px;
+      line-height: 1.7;
       margin: 0;
       transform: translateZ(10px);
     }
 
-    /* Meals Section with Flip Cards */
+    .feature-list {
+      list-style: none;
+      margin-top: 20px;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 8px 0;
+      color: var(--text-secondary);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-list li::before {
+      content: '→';
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+      padding: 120px 60px;
+      background: linear-gradient(180deg, transparent 0%, rgba(79, 124, 255, 0.03) 50%, transparent 100%);
+    }
+
+    .steps-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-number {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--card), rgba(79, 124, 255, 0.1));
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 0 auto 24px;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .step-number::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), transparent);
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    .step h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .step-connector {
+      position: absolute;
+      top: 40px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border) 0%, var(--primary) 50%, var(--border) 100%);
+      z-index: 1;
+      opacity: 0.3;
+    }
+
+    /* Meals Section with Fixed Images */
     .meals {
-      padding: 80px 40px;
-      max-width: 1400px;
+      padding: 120px 60px;
+      max-width: 1440px;
       margin: 0 auto;
     }
 
-    .section-header {
-      text-align: center;
+    .meals-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
       margin-bottom: 60px;
     }
 
-    .section-header h2 {
-      font-size: 42px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .meals-filter {
+      display: flex;
+      gap: 12px;
     }
 
-    .section-header p {
+    .filter-btn {
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--border);
       color: var(--text-secondary);
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      transition: all 0.3s;
     }
 
-    .meal-grid {
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px rgba(79, 124, 255, 0.3);
+    }
+
+    .meals-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 32px;
-      perspective: 1000px;
     }
 
     .meal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
-      height: 400px;
       transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
     }
 
     .meal-card:hover {
-      transform: rotateY(10deg) rotateX(5deg) translateZ(20px);
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      border-color: rgba(79, 124, 255, 0.3);
     }
 
-    .meal-card-inner {
+    .meal-image-container {
       position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 24px;
+      height: 240px;
       overflow: hidden;
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     }
 
     .meal-image {
       width: 100%;
-      height: 60%;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.5s;
     }
@@ -431,74 +782,160 @@
       transform: scale(1.1);
     }
 
+    .meal-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(2, 4, 10, 0.9), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: end;
+      padding: 20px;
+    }
+
+    .meal-card:hover .meal-overlay {
+      opacity: 1;
+    }
+
+    .quick-add {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    .meal-card:hover .quick-add {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
     .meal-content {
       padding: 24px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(11, 15, 26, 0.95), transparent);
+    }
+
+    .meal-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
     }
 
     .meal-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      background: rgba(34, 197, 94, 0.2);
-      color: var(--accent);
+      padding: 4px 10px;
       border-radius: 20px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 8px;
-      border: 1px solid rgba(34, 197, 94, 0.3);
     }
 
-    .meal-content h4 {
-      margin: 0 0 8px 0;
+    .tag-high-protein {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .tag-bulking {
+      background: rgba(79, 124, 255, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(79, 124, 255, 0.3);
+    }
+
+    .tag-cutting {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .meal-title {
       font-size: 20px;
       font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .meal-description {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 16px;
     }
 
     .meal-stats {
       display: flex;
       gap: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meal-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       font-size: 13px;
       color: var(--text-secondary);
     }
 
-    .meal-stats span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+    .meal-stat i {
+      color: var(--primary);
+      font-size: 14px;
     }
 
-    /* Advanced Calculator */
+    /* Calculator Section */
     .calculator {
-      padding: 100px 40px;
-      background: linear-gradient(180deg, transparent 0%, rgba(79, 124, 255, 0.05) 50%, transparent 100%);
+      padding: 120px 60px;
+      position: relative;
     }
 
-    .calc-container {
-      max-width: 1000px;
+    .calc-wrapper {
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 60px;
       align-items: start;
     }
 
-    .calc-form {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
+    .calc-form-container {
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border-radius: 32px;
+      padding: 48px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .calc-header {
+      margin-bottom: 40px;
+    }
+
+    .calc-header h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .calc-header p {
+      color: var(--text-secondary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
     }
 
     .form-group {
       margin-bottom: 24px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
     }
 
     .form-group label {
@@ -511,10 +948,23 @@
       color: var(--text-secondary);
     }
 
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
     input, select {
       width: 100%;
       padding: 14px 16px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--border);
       border-radius: 12px;
       color: var(--text);
@@ -526,539 +976,1163 @@
 
     input:focus, select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.1);
-      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 4px rgba(79, 124, 255, 0.1);
+      background: rgba(0, 0, 0, 0.4);
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .radio-option {
+      flex: 1;
+      min-width: 100px;
+      position: relative;
+    }
+
+    .radio-option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .radio-option label {
+      display: block;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--text-secondary);
+    }
+
+    .radio-option input:checked + label {
+      background: rgba(79, 124, 255, 0.2);
+      border-color: var(--primary);
+      color: var(--text);
+      box-shadow: 0 4px 20px rgba(79, 124, 255, 0.2);
     }
 
     .calc-result {
-      margin-top: 32px;
-      padding: 24px;
+      margin-top: 40px;
+      padding: 32px;
       background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
       border: 1px solid rgba(34, 197, 94, 0.3);
-      border-radius: 16px;
+      border-radius: 20px;
       display: none;
-      animation: slideIn 0.5s ease-out;
+      animation: slideUp 0.5s ease-out;
     }
 
     .calc-result.active {
       display: block;
     }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .result-calories {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .result-label {
+      color: var(--text-secondary);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .result-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-top: 16px;
+      margin-bottom: 24px;
     }
 
     .result-item {
-      text-align: center;
-      padding: 16px;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
       border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .result-value {
-      font-size: 28px;
+      font-size:
+      24px;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
-    .result-label {
-      font-size: 11px;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
+    .result-item .result-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
 
-    /* Info Card */
-    .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 40px;
-      position: sticky;
-      top: 100px;
-    }
+.result-actions {
+  display: flex;
+  gap: 12px;
+}
 
-    .info-card h3 {
-      font-size: 24px;
-      margin-bottom: 16px;
-      color: var(--primary);
-    }
+.result-actions .btn {
+  flex: 1;
+  justify-content: center;
+}
 
-    .info-card p {
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
+/* Info Sidebar */
+.calc-info {
+  position: sticky;
+  top: 100px;
+}
 
-    .benefit-list {
-      list-style: none;
-      space-y: 12px;
-    }
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
 
-    .benefit-list li {
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
+.info-card h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-    .benefit-list li::before {
-      content: '✓';
-      color: var(--accent);
-      font-weight: 700;
-      width: 24px;
-      height: 24px;
-      background: rgba(34, 197, 94, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-    }
+.info-card h3 i {
+  color: var(--primary);
+}
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 60px 40px;
-      border-top: 1px solid var(--border);
-      margin-top: 100px;
-      background: rgba(0, 0, 0, 0.3);
-    }
+.info-card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
 
-    footer p {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
+.formula-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
+.formula-box strong {
+  color: var(--primary);
+}
 
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s;
-    }
+.benefit-list {
+  list-style: none;
+  space-y: 12px;
+}
 
-    .footer-links a:hover {
-      color: var(--primary);
-    }
+.benefit-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
 
-    /* Parallax Scroll Animation */
-    .parallax-element {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(79, 124, 255, 0.2) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(60px);
-    }
+.benefit-list li:last-child {
+  border-bottom: none;
+}
 
-    .parallax-1 { top: 20%; left: -10%; animation: float 15s infinite; }
-    .parallax-2 { top: 60%; right: -5%; animation: float 18s infinite reverse; }
-    .parallax-3 { bottom: 20%; left: 30%; animation: float 20s infinite; }
+.benefit-list li i {
+  color: var(--accent);
+  width: 24px;
+  height: 24px;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
 
-    /* Responsive */
-    @media (max-width: 968px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-      }
+.tip-box {
+  background: linear-gradient(135deg, rgba(79, 124, 255, 0.1), rgba(79, 124, 255, 0.05));
+  border: 1px solid rgba(79, 124, 255, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 24px;
+}
 
-      .hero h2 {
-        font-size: 40px;
-      }
+.tip-box h4 {
+  font-size: 14px;
+  color: var(--primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-      .hero-stats {
-        justify-content: center;
-      }
+.tip-box p {
+  font-size: 13px;
+  margin: 0;
+  color: var(--text-secondary);
+}
 
-      .features {
-        grid-template-columns: 1fr;
-      }
+/* Testimonials */
+.testimonials {
+  padding: 120px 60px;
+  background: linear-gradient(180deg, transparent 0%, rgba(34, 197, 94, 0.03) 50%, transparent 100%);
+}
 
-      .calc-container {
-        grid-template-columns: 1fr;
-      }
+.testimonials-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
 
-      .info-card {
-        position: relative;
-        top: 0;
-      }
+.testimonial-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.4s;
+}
 
-      nav {
-        display: none;
-      }
-    }
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(79, 124, 255, 0.3);
+}
 
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 60px;
+  color: var(--primary);
+  opacity: 0.2;
+  font-family: serif;
+  line-height: 1;
+}
 
-    /* Loading Animation */
-    .loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.5s;
-    }
+.testimonial-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-style: italic;
+}
 
-    .loader.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(79, 124, 255, 0.3);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 18px;
+}
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+.author-info h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.author-info p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.stars {
+  color: #f59e0b;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 100px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(79, 124, 255, 0.1), rgba(34, 197, 94, 0.05));
+  border: 1px solid rgba(79, 124, 255, 0.2);
+  border-radius: 32px;
+  padding: 80px 60px;
+  position: relative;
+  backdrop-filter: blur(20px);
+}
+
+.cta-section h2 {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cta-section p {
+  color: var(--text-secondary);
+  font-size: 18px;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-large {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+/* Footer */
+footer {
+  padding: 80px 60px 40px;
+  border-top: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+}
+
+.footer-brand {
+  max-width: 300px;
+}
+
+.footer-brand .logo {
+  margin-bottom: 20px;
+  display: inline-flex;
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.footer-column h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 12px;
+}
+
+.footer-column a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: var(--primary);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-bottom-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotateY(-5deg) rotateX(5deg); }
+  50% { transform: translateY(-20px) rotateY(5deg) rotateX(10deg); }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .hero { grid-template-columns: 1fr; text-align: center; gap: 60px; }
+  .hero h1 { font-size: 56px; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .hero-stats { justify-content: center; }
+  .hero-visual { order: -1; max-width: 500px; margin: 0 auto; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .meals-grid { grid-template-columns: repeat(2, 1fr); }
+  .calc-wrapper { grid-template-columns: 1fr; }
+  .calc-info { position: relative; top: 0; }
+  .steps-container { grid-template-columns: repeat(2, 1fr); }
+  .step-connector { display: none; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  header { padding: 15px 20px; }
+  nav { display: none; }
+  .mobile-menu-btn { display: block; }
+  .hero { padding: 120px 20px 60px; }
+  .hero h1 { font-size: 40px; }
+  .hero-buttons { flex-direction: column; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+  .stat::after { display: none; }
+  .features, .meals, .calculator, .testimonials { padding: 80px 20px; }
+  .features-grid, .meals-grid, .steps-container { grid-template-columns: 1fr; }
+  .meals-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .result-grid { grid-template-columns: 1fr; }
+  .cta-section { padding: 60px 20px; }
+  .cta-container { padding: 40px 24px; }
+  .cta-section h2 { font-size: 32px; }
+  .cta-buttons { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(2, 4, 10, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.mobile-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.mobile-menu .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateX(400px);
+  transition: transform 0.3s;
+  z-index: 9999;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
+
+.toast-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.toast-content h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.toast-content p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+ </style>
 </head>
 <body>
-
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+    <a href="#home" onclick="toggleMobileMenu()">Home</a>
+    <a href="#features" onclick="toggleMobileMenu()">Features</a>
+    <a href="#meals" onclick="toggleMobileMenu()">Meals</a>
+    <a href="#calc" onclick="toggleMobileMenu()">Calculator</a>
+    <a href="#" class="btn" onclick="toggleMobileMenu()">Get Started</a>
   </div>
-
-  <div class="bg-3d"></div>
-  <div class="parallax-element parallax-1"></div>
-  <div class="parallax-element parallax-2"></div>
-  <div class="parallax-element parallax-3"></div>
-
-  <header>
-    <h1>⚡ Athlete Fuel</h1>
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <div class="toast-icon"><i class="fas fa-check"></i></div>
+    <div class="toast-content">
+      <h4>Added to Cart</h4>
+      <p>Meal added to your weekly plan</p>
+    </div>
+  </div>
+  <header id="header">
+    <a href="#" class="logo">
+      <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+      Athlete Fuel
+    </a>
     <nav>
-      <a href="#home">Home</a>
+      <a href="#home" class="active">Home</a>
+      <a href="#features">Features</a>
       <a href="#meals">Meals</a>
       <a href="#calc">Calculator</a>
-      <a href="#about">About</a>
-      <a href="#" class="btn">Get Started</a>
+      <a href="#testimonials">Reviews</a>
     </nav>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="#" class="btn">Get Started <i class="fas fa-arrow-right"></i></a>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </div>
   </header>
-
   <section class="hero" id="home">
     <div class="hero-content">
-      <h2>Fuel Like a Pro Athlete</h2>
-      <p>Elite nutrition coaching meets gourmet meal delivery. Personalized macro plans, premium ingredients, and proven results trusted by professional athletes worldwide.</p>
-      <a href="#calc" class="btn">Calculate Your Plan</a>
-      
+      <div class="badge">Trusted by 50,000+ Athletes</div>
+      <h1>Fuel Like a Pro Athlete</h1>
+      <p>Elite nutrition coaching meets gourmet meal delivery. Our PhD-designed algorithms create personalized macro plans that adapt to your training schedule, body composition, and performance goals.</p>
+      <div class="hero-buttons">
+        <a href="#calc" class="btn btn-large">Calculate My Plan <i class="fas fa-calculator"></i></a>
+        <a href="#meals" class="btn btn-secondary btn-large">View Menu <i class="fas fa-utensils"></i></a>
+      </div>
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-value">50k+</span>
-          <span class="stat-label">Athletes</span>
+          <span class="stat-value" data-target="50000">0</span>
+          <span class="stat-label">Active Athletes</span>
         </div>
         <div class="stat">
           <span class="stat-value">98%</span>
-          <span class="stat-label">Success Rate</span>
+          <span class="stat-label">Goal Success</span>
         </div>
         <div class="stat">
           <span class="stat-value">4.9★</span>
-          <span class="stat-label">Rating</span>
+          <span class="stat-label">App Rating</span>
         </div>
       </div>
+    </div>
+    <div class="hero-visual">
+  <div class="dashboard-card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Today's Nutrition Target</div>
+        <div style="font-size: 13px; color: var(--text-secondary); margin-top: 4px;">Bulking Phase • Week 4</div>
+      </div>
+      <div class="card-badge"><i class="fas fa-fire"></i> On Track</div>
     </div>
     
-    <div class="glass-card">
-      <h3 style="margin-bottom: 8px; font-size: 20px;">Today's Target</h3>
-      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Based on your bulking phase</p>
-      <div class="macro-display">
-        <div class="macro-item">
-          <div class="macro-value">2,800</div>
-          <div class="macro-label">Calories</div>
-        </div>
-        <div class="macro-item">
-          <div class="macro-value">180g</div>
-          <div class="macro-label">Protein</div>
-        </div>
-        <div class="macro-item">
-          <div class="macro-value">300g</div>
-          <div class="macro-label">Carbs</div>
-        </div>
-        <div class="macro-item">
-          <div class="macro-value">80g</div>
-          <div class="macro-label">Fats</div>
-        </div>
+    <div class="macro-grid">
+      <div class="macro-box calories">
+        <div class="macro-value">2,800</div>
+        <div class="macro-label">Calories</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
       </div>
-      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 14px; color: var(--text-secondary);">Next meal in</span>
-          <span style="font-size: 18px; font-weight: 700; color: var(--primary);">02:45:30</span>
-        </div>
+      <div class="macro-box protein">
+        <div class="macro-value">180g</div>
+        <div class="macro-label">Protein</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+      </div>
+      <div class="macro-box carbs">
+        <div class="macro-value">300g</div>
+        <div class="macro-label">Carbs</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 45%"></div></div>
+      </div>
+      <div class="macro-box fats">
+        <div class="macro-value">80g</div>
+        <div class="macro-label">Fats</div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 60%"></div></div>
       </div>
     </div>
-  </section>
 
-  <section class="features">
-    <div class="feature-card">
-      <div class="feature-icon">🍗</div>
-      <h3>Smart Meal AI</h3>
-      <p>Our algorithm analyzes your training schedule, body composition, and goals to generate the perfect meal timing and macros.</p>
+    <div class="next-meal">
+      <div class="next-meal-info">
+        <h4>Next Meal</h4>
+        <p>Post-Workout Shake</p>
+      </div>
+      <div class="timer" id="countdown">02:45:30</div>
     </div>
-    <div class="feature-card">
-      <div class="feature-icon">📦</div>
-      <h3>Premium Delivery</h3>
-      <p>Chef-prepared meals delivered fresh daily in temperature-controlled packaging. Never frozen, always optimal.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📊</div>
-      <h3>Advanced Analytics</h3>
-      <p>Track body composition changes, energy levels, and performance metrics with our integrated dashboard.</p>
-    </div>
+  </div>
+</div>
   </section>
-
-  <section id="meals" class="meals">
+  <section class="features" id="features">
     <div class="section-header">
-      <h2>Performance Meals</h2>
-      <p>Designed by sports nutritionists, prepared by Michelin-trained chefs</p>
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Science-Backed Nutrition</h2>
+      <p class="section-subtitle">We combine sports nutrition science with AI technology to deliver results that actually work in the real world.</p>
+    </div>
+    <div class="features-grid">
+  <div class="feature-card">
+    <div class="feature-icon-wrap">
+      <i class="fas fa-brain"></i>
+    </div>
+    <h3>AI-Powered Planning</h3>
+    <p>Our algorithm analyzes your training data, sleep patterns, and biometrics to adjust your nutrition in real-time.</p>
+    <ul class="feature-list">
+      <li>Adaptive macro cycling</li>
+      <li>Training load integration</li>
+      <li>Sleep-based recovery fuel</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon-wrap">
+      <i class="fas fa-truck-fast"></i>
+    </div>
+    <h3>Premium Delivery</h3>
+    <p>Chef-prepared meals delivered fresh to your door twice daily. Never frozen, always optimized for nutrient timing.</p>
+    <ul class="feature-list">
+      <li>Temperature-controlled packaging</li>
+      <li>Flexible delivery windows</li>
+      <li>Global cuisine variety</li>
+    </ul>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon-wrap">
+      <i class="fas fa-chart-line"></i>
+    </div>
+    <h3>Advanced Analytics</h3>
+    <p>Track body composition, energy levels, and performance metrics with our integrated dashboard and wearable sync.</p>
+    <ul class="feature-list">
+      <li>Whoop & Garmin integration</li>
+      <li>Progress photo tracking</li>
+      <li>Weekly adjustment protocols</li>
+    </ul>
+  </div>
+</div>
+ </section>
+  <section class="how-it-works">
+    <div class="section-header">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Your Journey to Peak Performance</h2>
+    </div>
+    <div class="steps-container">
+  <div class="step-connector"></div>
+  
+  <div class="step">
+    <div class="step-number">1</div>
+    <h3>Assessment</h3>
+    <p>Complete our comprehensive body composition and lifestyle analysis.</p>
+  </div>
+  
+  <div class="step">
+    <div class="step-number">2</div>
+    <h3>Planning</h3>
+    <p>Receive your personalized macro strategy and meal timeline.</p>
+  </div>
+  
+  <div class="step">
+    <div class="step-number">3</div>
+    <h3>Delivery</h3>
+    <p>Fresh meals arrive twice daily based on your training schedule.</p>
+  </div>
+  
+  <div class="step">
+    <div class="step-number">4</div>
+    <h3>Optimization</h3>
+    <p>Weekly check-ins adjust your plan based on progress data.</p>
+  </div>
+</div>
+  </section>
+  <section id="meals" class="meals">
+    <div class="meals-header">
+      <div>
+        <div class="section-label" style="margin-bottom: 12px;">Chef-Crafted Menu</div>
+        <h2 class="section-title" style="margin: 0;">Performance Meals</h2>
+      </div>
+      <div class="meals-filter">
+        <button class="filter-btn active" onclick="filterMeals('all')">All</button>
+        <button class="filter-btn" onclick="filterMeals('bulking')">Bulking</button>
+        <button class="filter-btn" onclick="filterMeals('cutting')">Cutting</button>
+        <button class="filter-btn" onclick="filterMeals('maintenance')">Maintenance</button>
+      </div>
+    </div>
+<div class="calc-wrapper">
+  <div class="calc-form-container">
+    <div class="calc-header">
+      <h2>Calculate Your Targets</h2>
+      <p>Fill in your details below for personalized recommendations.</p>
     </div>
     
-    <div class="meal-grid">
-      <div class="meal-card">
-        <div class="meal-card-inner">
-          <img src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&q=80" alt="Chicken & Rice" class="meal-image">
-          <div class="meal-content">
-            <div class="meal-tag">High Protein</div>
-            <h4>Teriyaki Chicken Bowl</h4>
-            <div class="meal-stats">
-              <span>🔥 650 kcal</span>
-              <span>🥩 45g protein</span>
-              <span>⏱️ 8 min</span>
+    <form id="macroForm" onsubmit="event.preventDefault(); calculateMacros();">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" name="gender" id="male" value="male" checked>
+              <label for="male"><i class="fas fa-mars"></i> Male</label>
             </div>
+            <div class="radio-option">
+              <input type="radio" name="gender" id="female" value="female">
+              <label for="female"><i class="fas fa-venus"></i> Female</label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Age</label>
+          <div class="input-wrap">
+            <i class="fas fa-calendar"></i>
+            <input type="number" id="age" placeholder="25" min="18" max="80" required>
           </div>
         </div>
       </div>
 
-      <div class="meal-card">
-        <div class="meal-card-inner">
-          <img src="https://images.unsplash.com/photo-1547496502-ffa76f1d21a6?w=800&q=80" alt="Beef Bowl" class="meal-image">
-          <div class="meal-content">
-            <div class="meal-tag" style="background: rgba(79, 124, 255, 0.2); color: var(--primary); border-color: rgba(79, 124, 255, 0.3);">Bulking</div>
-            <h4>Wagyu Beef Power Bowl</h4>
-            <div class="meal-stats">
-              <span>🔥 850 kcal</span>
-              <span>🥩 52g protein</span>
-              <span>⏱️ 12 min</span>
-            </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <div class="input-wrap">
+            <i class="fas fa-weight"></i>
+            <input type="number" id="weight" placeholder="75" step="0.1" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Height (cm)</label>
+          <div class="input-wrap">
+            <i class="fas fa-ruler-vertical"></i>
+            <input type="number" id="height" placeholder="180" step="0.1" required>
           </div>
         </div>
       </div>
 
-      <div class="meal-card">
-        <div class="meal-card-inner">
-          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80" alt="Salad" class="meal-image">
-          <div class="meal-content">
-            <div class="meal-tag" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3);">Cutting</div>
-            <h4>Superfood Salmon Salad</h4>
-            <div class="meal-stats">
-              <span>🔥 420 kcal</span>
-              <span>🥩 38g protein</span>
-              <span>⏱️ 5 min</span>
-            </div>
+      <div class="form-group">
+        <label>Activity Level</label>
+        <select id="activity" required>
+          <option value="1.2">Sedentary (Office job, no exercise)</option>
+          <option value="1.375">Lightly Active (Exercise 1-3 days/week)</option>
+          <option value="1.55" selected>Moderately Active (Exercise 3-5 days/week)</option>
+          <option value="1.725">Very Active (Exercise 6-7 days/week)</option>
+          <option value="1.9">Extra Active (Athlete/Physical job)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Goal</label>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="goal" id="cut" value="cut">
+            <label for="cut"><i class="fas fa-fire"></i> Fat Loss</label>
           </div>
+          <div class="radio-option">
+            <input type="radio" name="goal" id="maintain" value="maintain">
+            <label for="maintain"><i class="fas fa-balance-scale"></i> Maintain</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="goal" id="bulk" value="bulk" checked>
+            <label for="bulk"><i class="fas fa-dumbbell"></i> Muscle Gain</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn" style="width: 100%; margin-top: 8px; padding: 16px;">
+        <i class="fas fa-calculator"></i> Calculate My Plan
+      </button>
+    </form>
+
+    <div id="result" class="calc-result">
+      <div class="result-header">
+        <div class="result-calories" id="total-cals">0</div>
+        <div class="result-label">Daily Calories Target</div>
+      </div>
+      
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-value" id="protein-val">0g</div>
+          <div class="result-label">Protein</div>
+        </div>
+        <div class="result-item">
+          <div class="result-value" id="carbs-val">0g</div>
+          <div class="result-label">Carbs</div>
+        </div>
+        <div class="result-item">
+          <div class="result-value" id="fats-val">0g</div>
+          <div class="result-label">Fats</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.2); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 13px;">
+          <span style="color: var(--text-secondary)">BMR (Basal Metabolic Rate)</span>
+          <span style="color: var(--text); font-weight: 600;" id="bmr-val">0 kcal</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 13px;">
+          <span style="color: var(--text-secondary)">TDEE (Total Daily Energy)</span>
+          <span style="color: var(--text); font-weight: 600;" id="tdee-val">0 kcal</span>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn" onclick="savePlan()"><i class="fas fa-save"></i> Save Plan</button>
+        <button class="btn btn-secondary" onclick="resetCalc()"><i class="fas fa-redo"></i> Recalculate</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-info">
+    <div class="info-card">
+      <h3><i class="fas fa-flask"></i> The Science</h3>
+      <p>We use the Mifflin-St Jeor equation (the most accurate for athletes) combined with your training volume to calculate precise targets.</p>
+      
+      <div class="formula-box">
+        <div><strong>BMR Formula:</strong></div>
+        <div style="margin-top: 8px; font-size: 12px;">
+          Men: 10W + 6.25H - 5A + 5<br>
+          Women: 10W + 6.25H - 5A - 161
+        </div>
+      </div>
+
+      <ul class="benefit-list">
+        <li><i class="fas fa-check"></i> PhD-designed algorithms</li>
+        <li><i class="fas fa-check"></i> Adjusts for training intensity</li>
+        <li><i class="fas fa-check"></i> Macro cycling options</li>
+        <li><i class="fas fa-check"></i> Meal timing optimization</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <div class="tip-box">
+        <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+        <p>For optimal muscle gain, aim for 1.6-2.2g protein per kg of bodyweight. During cutting phases, increase to 2.3-3.1g to preserve muscle mass.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+  <section class="testimonials" id="testimonials">
+    <div class="section-header">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Trusted by Elite Athletes</h2>
+    </div>
+
+    <div class="testimonials-grid">
+  <div class="testimonial-card">
+    <p class="testimonial-text">"Athlete Fuel completely transformed my prep for the Olympics. The precision macro timing helped me drop 8% body fat while maintaining strength."</p>
+    <div class="testimonial-author">
+      <div class="author-avatar">MK</div>
+      <div class="author-info">
+        <h4>Michael K.</h4>
+        <p>Professional Swimmer</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="calc" class="calculator">
-    <div class="calc-container">
-      <div class="calc-form">
-        <h2 style="margin-bottom: 8px; font-size: 32px;">Smart Calculator</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 32px;">Precision nutrition targets based on your physiology</p>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label>Gender</label>
-            <select id="gender">
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Age</label>
-            <input type="number" id="age" placeholder="25" min="18" max="80">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Weight (kg)</label>
-            <input type="number" id="weight" placeholder="75" step="0.1">
-          </div>
-          <div class="form-group">
-            <label>Height (cm)</label>
-            <input type="number" id="height" placeholder="180" step="0.1">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Activity Level</label>
-          <select id="activity">
-            <option value="1.2">Sedentary (Office job)</option>
-            <option value="1.375">Light Exercise (1-2 days/week)</option>
-            <option value="1.55" selected>Moderate Exercise (3-5 days/week)</option>
-            <option value="1.725">Heavy Exercise (6-7 days/week)</option>
-            <option value="1.9">Athlete (2x per day)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Goal</label>
-          <select id="goal">
-            <option value="cut">Fat Loss (Cutting)</option>
-            <option value="maintain">Maintenance</option>
-            <option value="bulk" selected>Muscle Gain (Bulking)</option>
-          </select>
-        </div>
-
-        <button class="btn" onclick="calculateMacros()" style="width: 100%; margin-top: 8px;">
-          Calculate My Plan
-        </button>
-
-        <div id="result" class="calc-result">
-          <div style="text-align: center; margin-bottom: 16px;">
-            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 4px;">Daily Target</div>
-            <div style="font-size: 36px; font-weight: 800; color: var(--accent);" id="total-cals">0 kcal</div>
-          </div>
-          <div class="result-grid">
-            <div class="result-item">
-              <div class="result-value" id="protein-val">0g</div>
-              <div class="result-label">Protein</div>
-            </div>
-            <div class="result-item">
-              <div class="result-value" id="carbs-val">0g</div>
-              <div class="result-label">Carbs</div>
-            </div>
-            <div class="result-item">
-              <div class="result-value" id="fats-val">0g</div>
-              <div class="result-label">Fats</div>
-            </div>
-            <div class="result-item">
-              <div class="result-value" id="bmr-val">0</div>
-              <div class="result-label">BMR</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="info-card">
-        <h3>Why Athletes Choose Us</h3>
-        <p>Our calculator uses the Mifflin-St Jeor equation combined with training volume factors to provide precision targets that actually work.</p>
-        
-        <ul class="benefit-list">
-          <li>PhD-designed algorithms</li>
-          <li>Adjusts for training intensity</li>
-          <li>Macro cycling options</li>
-          <li>Meal timing optimization</li>
-          <li>Supplement recommendations</li>
-          <li>Weekly adjustment protocols</li>
-        </ul>
-
-        <div style="margin-top: 32px; padding: 20px; background: rgba(79, 124, 255, 0.1); border-radius: 12px; border: 1px solid rgba(79, 124, 255, 0.2);">
-          <div style="font-size: 14px; color: var(--primary); font-weight: 600; margin-bottom: 4px;">Pro Tip</div>
-          <div style="font-size: 13px; color: var(--text-secondary);">For optimal results, aim for 1.6-2.2g protein per kg of bodyweight during bulking phases.</div>
+  <div class="testimonial-card">
+    <p class="testimonial-text">"As a CrossFit competitor, I need fuel that matches my training cycles. The AI adjustments are spot-on. Best investment in my performance."</p>
+    <div class="testimonial-author">
+      <div class="author-avatar">SL</div>
+      <div class="author-info">
+        <h4>Sarah L.</h4>
+        <p>CrossFit Games Athlete</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
+  <div class="testimonial-card">
+    <p class="testimonial-text">"The Wagyu bowls are incredible. Having gourmet meals that fit my macros exactly has made bulking so much easier and tastier."</p>
+    <div class="testimonial-author">
+      <div class="author-avatar">JR</div>
+      <div class="author-info">
+        <h4>James R.</h4>
+        <p>IFBB Pro Bodybuilder</p>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ </section>
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Ready to Fuel Your Performance?</h2>
+      <p>Join 50,000+ athletes who have transformed their nutrition and performance with Athlete Fuel.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-large">Start Free Trial <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="btn btn-secondary btn-large">View Pricing</a>
+      </div>
+      <p style="margin-top: 24px; font-size: 14px; color: var(--text-secondary);">No credit card required. Cancel anytime.</p>
+    </div>
+  </section>
   <footer>
-    <div class="footer-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
-      <a href="#">Support</a>
-      <a href="#">Careers</a>
-    </div>
-    <p>© 2026 Athlete Fuel Inc. — Fueling Elite Performance</p>
-  </footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+          Athlete Fuel
+        </a>
+        <p>Elite nutrition coaching and gourmet meal delivery for athletes who demand the best. Science-backed, chef-crafted, results-driven.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
 
+        <div class="footer-column">
+    <h4>Product</h4>
+    <ul>
+      <li><a href="#">Features</a></li>
+      <li><a href="#">Meal Plans</a></li>
+      <li><a href="#">Pricing</a></li>
+      <li><a href="#">Success Stories</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-column">
+    <h4>Company</h4>
+    <ul>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="#">Press</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-column">
+    <h4>Support</h4>
+    <ul>
+      <li><a href="#">Help Center</a></li>
+      <li><a href="#">Delivery Info</a></li>
+      <li><a href="#">Nutrition Guide</a></li>
+      <li><a href="#">API</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer-bottom">
+  <p>&copy; 2026 Athlete Fuel Inc. All rights reserved.</p>
+  <div class="footer-bottom-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Cookie Settings</a>
+  </div>
+</div>
+</footer>
   <script>
-    // Remove loader
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hidden');
-      }, 500);
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
 
-    // 3D Parallax Effect on Mouse Move
-    document.addEventListener('mousemove', (e) => {
-      const cards = document.querySelectorAll('.glass-card, .feature-card, .meal-card');
-      const mouseX = e.clientX / window.innerWidth - 0.5;
-      const mouseY = e.clientY / window.innerHeight - 0.5;
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
 
-      cards.forEach((card, index) => {
-        const speed = (index % 3 + 1) * 5;
-        const x = mouseX * speed;
-        const y = mouseY * speed;
-        
-        if (card.classList.contains('glass-card')) {
-          card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg) translateZ(20px)`;
+    // Toast notification
+    function showToast(title, message) {
+      const toast = document.getElementById('toast');
+      toast.querySelector('h4').textContent = title;
+      toast.querySelector('p').textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Add to cart
+    function addToCart(mealName) {
+      showToast('Added to Plan', `${mealName} added to your weekly meal plan`);
+    }
+
+    // Meal filtering
+    function filterMeals(category) {
+      const cards = document.querySelectorAll('.meal-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 10);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
         }
       });
-    });
+    }
 
-    // Advanced Calculator
+    // Advanced Calculator with Mifflin-St Jeor
     function calculateMacros() {
-      const gender = document.getElementById('gender').value;
+      const gender = document.querySelector('input[name="gender"]:checked').value;
       const age = parseFloat(document.getElementById('age').value);
       const weight = parseFloat(document.getElementById('weight').value);
       const height = parseFloat(document.getElementById('height').value);
       const activity = parseFloat(document.getElementById('activity').value);
-      const goal = document.getElementById('goal').value;
+      const goal = document.querySelector('input[name="goal"]:checked').value;
 
       if (!age || !weight || !height) {
-        alert('Please fill in all fields');
+        showToast('Error', 'Please fill in all fields');
         return;
       }
 
@@ -1073,22 +2147,20 @@
       const tdee = bmr * activity;
       
       let targetCalories;
-      if (goal === 'cut') targetCalories = tdee - 500;
-      else if (goal === 'bulk') targetCalories = tdee + 500;
-      else targetCalories = tdee;
-
-      // Macro split based on goal
       let proteinRatio, fatRatio, carbRatio;
       
       if (goal === 'cut') {
-        proteinRatio = 0.40;
+        targetCalories = tdee - 500;
+        proteinRatio = 0.45;
         fatRatio = 0.30;
-        carbRatio = 0.30;
+        carbRatio = 0.25;
       } else if (goal === 'bulk') {
+        targetCalories = tdee + 500;
         proteinRatio = 0.30;
         fatRatio = 0.25;
         carbRatio = 0.45;
       } else {
+        targetCalories = tdee;
         proteinRatio = 0.30;
         fatRatio = 0.30;
         carbRatio = 0.40;
@@ -1098,19 +2170,91 @@
       const fats = Math.round((targetCalories * fatRatio) / 9);
       const carbs = Math.round((targetCalories * carbRatio) / 4);
 
-      // Animate results
-      document.getElementById('result').classList.add('active');
-      document.getElementById('total-cals').textContent = Math.round(targetCalories) + ' kcal';
-      document.getElementById('protein-val').textContent = protein + 'g';
-      document.getElementById('carbs-val').textContent = carbs + 'g';
-      document.getElementById('fats-val').textContent = fats + 'g';
-      document.getElementById('bmr-val').textContent = Math.round(bmr);
+      // Display results
+      const resultDiv = document.getElementById('result');
+      resultDiv.classList.add('active');
+      
+      // Animate numbers
+      animateNumber('total-cals', Math.round(targetCalories), '', ' kcal');
+      animateNumber('protein-val', protein, '', 'g');
+      animateNumber('carbs-val', carbs, '', 'g');
+      animateNumber('fats-val', fats, '', 'g');
+      
+      document.getElementById('bmr-val').textContent = Math.round(bmr) + ' kcal';
+      document.getElementById('tdee-val').textContent = Math.round(tdee) + ' kcal';
 
-      // Smooth scroll to results on mobile
+      // Scroll to results on mobile
       if (window.innerWidth < 968) {
-        document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
+
+    function animateNumber(id, target, prefix = '', suffix = '') {
+      const element = document.getElementById(id);
+      const duration = 1000;
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = prefix + Math.round(current) + suffix;
+      }, 16);
+    }
+
+    function resetCalc() {
+      document.getElementById('result').classList.remove('active');
+      document.getElementById('macroForm').reset();
+    }
+
+    function savePlan() {
+      showToast('Plan Saved', 'Your nutrition plan has been saved to your profile');
+    }
+
+    // Countdown timer
+    function updateTimer() {
+      const now = new Date();
+      const nextMeal = new Date();
+      nextMeal.setHours(14, 0, 0); // 2 PM
+      
+      if (now > nextMeal) {
+        nextMeal.setDate(nextMeal.getDate() + 1);
+      }
+      
+      const diff = nextMeal - now;
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('countdown').textContent = 
+        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // 3D Tilt Effect for Cards
+    document.querySelectorAll('.meal-card, .feature-card, .testimonial-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+    });
 
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -1123,37 +2267,44 @@
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
+          
+          // Animate progress bars
+          if (entry.target.querySelector('.progress-fill')) {
+            entry.target.querySelectorAll('.progress-fill').forEach(bar => {
+              const width = bar.style.width;
+              bar.style.width = '0';
+              setTimeout(() => {
+                bar.style.width = width;
+              }, 200);
+            });
+          }
         }
       });
     }, observerOptions);
 
     // Observe elements
-    document.querySelectorAll('.feature-card, .meal-card').forEach((el, index) => {
+    document.querySelectorAll('.feature-card, .meal-card, .step, .testimonial-card').forEach((el, index) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
       el.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
       observer.observe(el);
     });
 
-    // Meal card 3D tilt effect
-    document.querySelectorAll('.meal-card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+    // Counter animation for stats
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.dataset.target);
+          if (target) {
+            animateNumber(entry.target.classList.contains('stat-value') ? entry.target.id : entry.target, target, '', '+');
+            statsObserver.unobserve(entry.target);
+          }
+        }
       });
-      
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-value[data-target]').forEach(stat => {
+      statsObserver.observe(stat);
     });
   </script>
 </body>
